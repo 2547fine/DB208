@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="./js/audiosynth.js"></script>
+</head>
+<body>
+    <div id="piano">
+    <div class="keys">
+        <!--Small size-->
+        <div class="octave" data-ocave="3">
+        <div class="key white" data-note="C" data-kb="a"></div>
+        <div class="key black" data-hote="C#" data-kb="w"></div>
+        <div class="key white" data-note="D" data-kb="s"></div>
+        <div class="key black" data-hote="D#" data-kb="d"></div>
+        <div class="key white" data-hote="E" data-kb="f"></div>
+        <div class="key white" data-hote="F" data-kb="g"></div>
+        <div class="key black" data-hote="F#" data-kb="t"></div>
+        <div class="key white" data-hote="G" data-kb="g"></div>
+        <div class="key black" data-hote="G#" data-kb="y"></div>
+        <div class="key white" data-hote="A" data-kb="h"></div>
+        <div class="key black" data-hote="A#" data-kb="y"></div>
+        <div class="key white" data-hote="B" data-kb="j"></div>
+        </div> 
+        <!--Small size-->
+        <div class="octave" data-ocave="4">
+            <div class="key white" data-note="C"></div>
+            <div class="key black" data-hote="C#"></div>
+            <div class="key white" data-note="D"></div>
+            <div class="key black" data-hote="D#"></div>
+            <div class="key white" data-hote="E"></div>
+            <div class="key white" data-hote="F"></div>
+            <div class="key black" data-hote="F#"></div>
+            <div class="key white" data-hote="G"></div>
+            <div class="key black" data-hote="G#"></div>
+            <div class="key white" data-hote="A"></div>
+            <div class="key black" data-hote="A#"></div>
+            <div class="key white" data-hote="B"></div>
+            </div> 
+        <!--Small size-->
+        <div class="octave" data-ocave="5">
+            <div class="key white" data-note="C"></div>
+            <div class="key black" data-hote="C#"></div>
+            <div class="key white" data-note="D"></div>
+            <div class="key black" data-hote="D#"></div>
+            <div class="key white" data-hote="E"></div>
+            <div class="key white" data-hote="F"></div>
+            <div class="key black" data-hote="F#"></div>
+            <div class="key white" data-hote="G"></div>
+            <div class="key black" data-hote="G#"></div>
+            <div class="key white" data-hote="A"></div>
+            <div class="key black" data-hote="A#"></div>
+            <div class="key white" data-hote="B"></div>
+            </div> 
+    </div>
+</div>
+    <script>
+        let piano=Synth.creatInstrument('piano');
+        let keys = document.querySelectorAll('.key');
+        for(let key of keys){
+            key.addEventLisener('mousedown', function(){
+                let note =this.dataset.note;
+                let octave =this.parentElement.dataetave;
+                piano.play(note, octave, 2);
+            });
+            }
+        
+
+        document.addEventLietener('keydown', function(event) {
+            let kd = event.key;
+            let key = docment.querySelector(
+            /*('.ket[data-kb="'+ kb +'"]')*/
+            `.key[data-kd="${kd}"]`);
+            if(key){
+                key.classList.add('pressed');
+                let note = key.dataset.note;
+                let octave = key.parentElement.dataset.octave;
+                piano.play(note, octave, 2);
+                setTimeout(function(){
+                    let key = document.querySelector(`.key[data=kb="${event.key}"]`);
+                    key.classList.remove('pressed');
+                }, 200);
+            }
+        });
+    </script>
+</body>
+</html>
